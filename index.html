@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/jpg" href="photos/ИЭиТ.jpg">
 
   <style>
     /* ====== НАСТРОЙКИ ДИЗАЙНА: основные цвета меняются здесь ====== */
@@ -36,7 +37,7 @@
       background:
         radial-gradient(circle at 80% 8%, rgba(58,156,232,.24), transparent 28rem),
         linear-gradient(135deg, #06132e 0%, #0b2856 48%, #14538b 100%);
-      background-attachment: fixed;
+      background-attachment: scroll; /* На мобильных устройствах снижает рывки прокрутки */
       line-height: 1.65;
       overflow-x: hidden;
     }
@@ -95,11 +96,7 @@
     }
     .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
     .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: -.02em; white-space: nowrap; }
-    .brand-mark {
-      display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px;
-      color: #052346; font-weight: 900; background: linear-gradient(135deg, #b1f1ff, #54bfff);
-      box-shadow: 0 8px 25px rgba(80,190,255,.2);
-    }
+    .brand-mark { width: 42px; }
     .nav-links { display: flex; align-items: center; gap: 22px; color: #d3e2f7; font-size: .88rem; }
     .nav-links a { transition: color .2s; }
     .nav-links a:hover { color: var(--accent); }
@@ -154,6 +151,22 @@
     .people-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
     .person-card { overflow: hidden; transition: transform .22s, background .22s; }
     .person-photo { width: 100%; aspect-ratio: 4/4.2; object-fit: cover; background: linear-gradient(135deg, #214d80, #12284d); }
+    .person-photo[src*="Olga_Vasilyeva"] { object-position: center 50%; }
+    .person-photo-wrap {width: 100%; aspect-ratio: 4 / 4.2; overflow: hidden; position: relative; background: linear-gradient(135deg, #214d80, #12284d); }
+    .person-photo { width: 100%; height: 100%; object-fit: cover; display: block; object-position: center;}
+    .person-photo[src*="Grumbkov"] { transform: scale(1.18); transform-origin: 50% 0%; }
+    .person-photo[src*="Darya_Levchenko"] { object-position: center 50%; }
+    .person-photo[src*="Lukyanov"] { object-position: center 40%; }
+    .person-photo[src*="Ekaterina_Kvashenkina"] { object-position: center 0%; }
+    .person-photo[src*="Yulia_Mokhova"] { object-position: center 66%; }
+    .person-photo[src*="Mikhail_Rubinshteyn"] { object-position: 90% 50%;  ; }
+    .person-photo[src*="Elena_Polisadova"] { object-position: 80% 0%; }
+    .person-photo[src*="Malysheva"] { object-position: center 60%; }
+    .person-photo[src*="Pavel_Bezhitrov"] { object-position: center 44%;}
+    .person-photo[src*="Olga_Borisovna"] { object-position: center 0%; }
+    .person-photo[src*="Irina_Naumova"] { object-position: center 10%; }
+    .person-photo[src*="Elena_Evgenyevna"] { object-position: center 22%; }
+    .person-photo[src*="Diana_Sergeevna"] {object-position: center 22%; }
     .person-info { padding: 18px; }
     .person-info h3 { font-size: 1rem; margin: 0 0 7px; }
     .person-info p { color: var(--muted); font-size: .84rem; margin: 0; }
@@ -242,9 +255,173 @@
       .person-info { padding: 13px; }
       .count-unit strong { font-size: 1.1rem; }
     }
+    /* ====== ДОПОЛНИТЕЛЬНАЯ ОПТИМИЗАЦИЯ ДЛЯ ТЕЛЕФОНОВ ====== */
+    @media (max-width: 720px) {
+      html { scroll-padding-top: 76px; }
+      body { font-size: 15px; }
+      .container { width: calc(100% - 32px); }
+      .section { padding: 54px 0; }
+      .site-header { backdrop-filter: blur(12px); }
+      .brand { min-width: 0; white-space: normal; line-height: 1.2; gap: 9px; }
+      .brand-mark { flex: 0 0 36px; }
+      .menu-toggle { flex: 0 0 auto; min-height: 44px; }
+      .nav-links { max-height: calc(100dvh - 68px); overflow-y: auto; }
+      .nav-links a { min-height: 42px; display: flex; align-items: center; }
+      .hero { padding: 48px 0 34px; }
+      h1 { font-size: clamp(2.25rem, 10vw, 3.6rem); overflow-wrap: anywhere; }
+      h2 { font-size: clamp(1.8rem, 7.5vw, 2.55rem); }
+      .lead { font-size: 1rem; }
+      .hero-meta { gap: 8px; margin: 20px 0; }
+      .pill { max-width: 100%; white-space: normal; font-size: .82rem; padding: 8px 11px; }
+      .hero-actions { display: grid; grid-template-columns: 1fr; }
+      .hero-actions .btn { width: 100%; min-height: 48px; }
+      .hero-art { min-height: 290px; }
+      .hero-card { width: min(100%, 340px); padding: 21px; transform: none; }
+      .hero-card .big-date { font-size: 3.2rem; }
+      .orbit { width: min(300px, 90%); }
+      .orbit.two { width: min(235px, 72%); }
+      .about-copy, .about-side, .form-card, .contact-card, .location-info { padding: 20px; }
+      .stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .stat { min-width: 0; padding: 12px 9px; }
+      .stat strong { font-size: clamp(1.1rem, 5vw, 1.5rem); overflow-wrap: anywhere; }
+      .stat span { font-size: .72rem; line-height: 1.35; }
+      .program-item { grid-template-columns: 1fr; gap: 7px; padding: 18px; }
+      .program-time { font-size: .86rem; }
+      .people-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .person-info { padding: 13px; }
+      .person-info h3 { font-size: .94rem; }
+      .person-info p { font-size: .8rem; line-height: 1.5; }
+      .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: clamp(115px, 36vw, 165px); }
+      .map-frame, .map-frame iframe, .map-placeholder { min-height: 260px; }
+      .form-row input { min-height: 48px; font-size: 16px; }
+      .btn { min-height: 46px; }
+      .lightbox img { max-width: 100%; max-height: 72dvh; }
+      .lightbox-close, .lightbox-nav { width: 44px; height: 44px; }
+      .lightbox-nav.prev { top: 50%; left: 8px; }
+      .lightbox-nav.next { top: 50%; right: 8px; }
+      .lightbox-caption { bottom: 12px; left: 54px; right: 54px; }
+      .top-link { right: 12px; bottom: 12px; }
+      .footer-inner { align-items: flex-start; }
+    }
+    @media (max-width: 420px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat { display: flex; align-items: baseline; gap: 12px; }
+      .stat strong { flex: 0 0 auto; }
+      .people-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+      .person-photo { aspect-ratio: 4 / 4.5; }
+      .countdown { gap: 5px; }
+      .count-unit { padding: 9px 2px; }
+      .count-unit span { font-size: .63rem; }
+    }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
       .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ====== ИСПРАВЛЕННАЯ ШАПКА И МЕНЮ ====== */
+    .site-header { position: sticky; top: 0; z-index: 100; }
+    .site-header .nav {
+      position: relative;
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .site-header .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      flex: 0 0 auto;
+      min-width: 0;
+      white-space: nowrap;
+      line-height: 1.2;
+    }
+    .site-header .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      max-width: 44px;
+      flex: 0 0 44px;
+      overflow: hidden;
+      border-radius: 14px;
+      font-size: 1.25rem;
+    }
+    .site-header .brand-mark img {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+    }
+    .brand-title { display: inline-block; }
+    .site-header .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(10px, 1.45vw, 22px);
+      min-width: 0;
+      font-size: clamp(.76rem, .95vw, .9rem);
+    }
+    .site-header .nav-links > a:not(.btn) {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      white-space: nowrap;
+    }
+    .site-header .nav-register {
+      flex: 0 0 auto;
+      white-space: nowrap;
+      padding: 12px 16px;
+    }
+    .site-header .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 13px;
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+    @media (max-width: 1050px) {
+      .site-header .nav { gap: 12px; }
+      .site-header .brand { font-size: .9rem; }
+      .site-header .brand-mark { width: 40px; height: 40px; min-width: 40px; max-width: 40px; flex-basis: 40px; }
+      .site-header .nav-links { gap: 10px; font-size: .78rem; }
+      .site-header .nav-register { padding: 11px 12px; }
+    }
+    @media (max-width: 850px) {
+      .site-header .nav { min-height: 68px; }
+      .site-header .menu-toggle { display: inline-flex; }
+      .site-header .nav-links {
+        display: none;
+        position: absolute;
+        top: calc(100% + 1px);
+        left: -16px;
+        right: -16px;
+        max-height: calc(100dvh - 76px);
+        overflow-y: auto;
+        padding: 14px 20px 20px;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 4px;
+        background: rgba(5,20,47,.98);
+        border-bottom: 1px solid var(--line);
+        box-shadow: 0 18px 30px rgba(0,0,0,.22);
+        font-size: .95rem;
+      }
+      .site-header .nav-links.open { display: flex; }
+      .site-header .nav-links > a:not(.btn) { min-height: 44px; padding: 9px 2px; white-space: normal; }
+      .site-header .nav-links .nav-register { justify-content: center; margin-top: 8px; min-height: 48px; }
+      .site-header .brand { white-space: nowrap; font-size: .95rem; }
+    }
+    @media (max-width: 390px) {
+      .site-header .container { width: calc(100% - 24px); }
+      .site-header .brand { gap: 8px; font-size: .82rem; }
+      .site-header .brand-mark { width: 36px; height: 36px; min-width: 36px; max-width: 36px; flex-basis: 36px; border-radius: 11px; }
+      .site-header .menu-toggle { font-size: .82rem; padding: 9px 10px; }
     }
   </style>
 </head>
@@ -253,16 +430,17 @@
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="#top" aria-label="Конгресс ВлГУ — на главную">
-        <span class="brand-mark">В</span><span>Медиаконгресс <span class="gradient-text">2026</span></span>
+        <img class="brand-mark" src="photos/Media_Sfera.png" alt="Медиасфера">
+        <span class="brand-title">Медиаконгресс <span class="gradient-text">2026</span></span>
       </a>
-      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-label="Открыть меню">☰ Меню</button>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Открыть меню" type="button">☰ Меню</button>
       <nav class="nav-links" id="navLinks" aria-label="Главное меню">
         <a href="#about">О конгрессе</a>
         <a href="#program">Программа</a>
         <a href="#speakers">Спикеры</a>
         <a href="#organizers">Организаторы</a>
         <a href="#location">Как добраться</a>
-        <a class="btn" href="#registration">Регистрация ↗</a>
+        <a class="btn nav-register" href="#registration">Регистрация <span aria-hidden="true">↗</span></a>
       </nav>
     </div>
   </header>
@@ -347,16 +525,64 @@
           <p class="lead">Основные события дня и тематические площадки по опубликованной программе.</p>
         </div>
         <div class="program-grid">
-          <article class="glass program-item reveal"><div class="program-time">10:00–11:30</div><div><h3>Площадка 1 · Для PR-специалистов</h3><p>10:00–10:45 — Елена Полисадова: «Контент-маркетинг с применением ИИ-технологий».</p><p>10:45–11:30 — Лариса Малышева: «Коммуникационная и бюджетная стратегия — 2027: как планировать в сложных условиях».</p><p class="muted">Модератор — уточняется организаторами.</p></div></article>
-          <article class="glass program-item reveal"><div class="program-time">10:00–11:30</div><div><h3>Площадка 2 · Для медиапедагогов</h3><p>Тема: «Эффективное управление медиакомандой: роли, коммуникация, мотивация».</p><p>Соорганизатор — Институт экономики и туризма ВлГУ. Модератор — Екатерина Якушина.</p></div></article>
-          <article class="glass program-item reveal"><div class="program-time">10:00–11:30</div><div><h3>Площадка 3 · Для женщин-руководителей</h3><p>«Как использовать искусственный интеллект в создании личного бренда и PR в социальных сетях».</p><p class="muted">Спикер — уточняется организаторами. Модератор — Дмитрий Козлов.</p></div></article>
-          <article class="glass program-item reveal"><div class="program-time">10:00–11:30</div><div><h3>Площадка 4 · Для журналистов</h3><p>Екатерина Квашенкина: «Всё о Дзене: новые возможности и инструменты для СМИ в 2026 году».</p><p>Модератор — Анна Соловьёва.</p></div></article>
-          <article class="glass program-item reveal"><div class="program-time">12:00–14:30</div><div><h3>Пленарное заседание</h3><p><b>12:10–12:40</b> — Юлия Мохова: «Четыре всадника коммуникационного апокалипсиса: ИИ, фейки, недоверие и хаос».</p><p><b>12:40–13:10</b> — Ольга Васильева: «Ответы нейросетей как источник информации: возможности анализа и новые задачи для коммуникаций».</p><p><b>13:10–13:30</b> — Дарья Левченко: «Информационная политика государства в условиях современных вызовов».</p><p>Модератор — Дмитрий Козлов. Также запланированы подведение итогов, награждение и фотоконкурс «Объектив памяти» имени Владимира Чучадеева.</p></div></article>
-          <article class="glass program-item reveal"><div class="program-time">15:00–16:00</div><div><h3>Специальное событие · Встреча с военкором</h3><p>Открытый разговор с Александром Лукьяновым, вопросы и ответы, обмен опытом работы в зоне СВО.</p><p>Модератор — Михаил Рубинштейн. Место — актовый зал ВлГУ.</p></div></article>
-          <article class="glass program-item reveal"><div class="program-time">15:00–16:00</div><div><h3>Круглый стол · ИИ, дипфейки и цифровой образ</h3><p>Тема: «ИИ, дипфейки и цифровой образ: новые риски для медиажурналистов и СМИ».</p><p>Спикер и модератор — Борис Грумбков.</p></div></article>
+          <article class="glass program-item reveal">
+            <div class="program-time">10:00–11:30</div>
+            <div><h3>Площадка для журналистов</h3>
+              <p class="muted">Модератор: Анна Александровна Соловьёва. Аудитория 335.</p>
+              <p><b>10:00–11:30</b> — Екатерина Ивановна Квашенкина: «Всё о Дзене: новые возможности и инструменты для СМИ в 2026 году».</p>
+            </div>
+          </article>
+          <article class="glass program-item reveal">
+            <div class="program-time">10:00–11:30</div>
+            <div><h3>Площадка для PR-специалистов</h3>
+              <p class="muted">Модератор: Елена Валентиновна Котелевец. Аудитория 210.</p>
+              <p><b>10:00–10:45</b> — Елена Александровна Полисадова: «Контент-маркетинг с применением ИИ-технологий».</p>
+              <p><b>10:45–11:30</b> — Лариса Геннадьевна Малышева: «Коммуникационная и бюджетная стратегия — 2027: как планировать в сложных условиях».</p>
+            </div>
+          </article>
+          <article class="glass program-item reveal">
+            <div class="program-time">10:00–11:30</div>
+            <div><h3>Площадка для женщин-руководителей</h3>
+              <p class="muted">Модератор: Дмитрий Андреевич Козлов. Аудитория 211.</p>
+              <p><b>10:00–11:30</b> — Павел Витальевич Бесхитров: «Как использовать искусственный интеллект в создании личного бренда и PR в социальных сетях».</p>
+            </div>
+          </article>
+          <article class="glass program-item reveal">
+            <div class="program-time">10:00–11:30</div>
+            <div><h3>Площадка для медиапедагогов</h3>
+              <p class="muted">Модератор: Екатерина Викторовна Якушина. Аудитория 224.</p>
+              <p><b>10:00–11:30</b> — «Эффективное управление медиакомандой: роли, коммуникация, мотивация». Команда бизнес-тренеров ИЭиТ ВлГУ.</p>
+            </div>
+          </article>
+          <article class="glass program-item reveal">
+            <div class="program-time">11:30–12:10</div>
+            <div><h3>Кофе-брейк</h3><p>Перерыв и неформальное общение участников.</p></div>
+          </article>
+          <article class="glass program-item reveal">
+            <div class="program-time">12:10–15:00</div>
+            <div><h3>Пленарное заседание</h3>
+              <p class="muted">Модератор: Дмитрий Андреевич Козлов. Место: актовый зал ВлГУ.</p>
+              <p><b>Юлия Александровна Мохова</b> — «Четыре всадника коммуникационного апокалипсиса: ИИ, фейки, недоверие и хаос».</p>
+              <p><b>Ольга Анатольевна Васильева</b> — «Ответы нейросетей как источник информации: возможности анализа и новые задачи для коммуникаций».</p>
+              <p><b>Дарья Владимировна Левченко</b> — «Информационная политика государства в условиях современных вызовов».</p>
+            </div>
+          </article>
+          <article class="glass program-item reveal">
+            <div class="program-time">15:00–16:00</div>
+            <div><h3>Специальное событие</h3>
+              <p class="muted">Модератор: Михаил Рудольфович Рубинштейн. Место: актовый зал ВлГУ.</p>
+              <p><b>Встреча с военкором Александром Геннадьевичем Лукьяновым.</b> Автор более 20 фильмов и специальных репортажей из зоны СВО, член Союза журналистов России, документалист и лектор общества «Знание».</p>
+            </div>
+          </article>
+          <article class="glass program-item reveal">
+            <div class="program-time">15:00–16:00</div>
+            <div><h3>Круглый стол</h3>
+              <p class="muted">Место: аудитория 224.</p>
+              <p><b>Тема:</b> «ИИ, дипфейки и цифровой образ: новые риски для медиажурналистов и СМИ».</p>
+              <p><b>Борис Валерьевич Грумбков</b> — генеральный директор АО «Издательский дом „Санкт-Петербургские ведомости“».</p>
+            </div>
+          </article>
         </div>
-        <p class="placeholder-note reveal">В программе есть позиции, по которым организаторы ещё выбирают спикера или модератора. Они отмечены прямо в карточках.</p>
-      </div>
     </section>
 
     <!-- ====== СПИКЕРЫ: фото и данные меняются в массиве speakers ниже ====== -->
@@ -381,8 +607,30 @@
           <p class="lead">Медиаконгресс проводят Ассоциация содействия развитию информационного пространства Владимирской области «Медиасфера Владимирской области» и Институт экономики и туризма ВлГУ.</p>
         </div>
         <div class="glass about-copy reveal" style="display:flex;align-items:center;gap:28px;flex-wrap:wrap">
-          <img src="photos/Media_Sfera.png" alt="Логотип ассоциации «Медиасфера Владимирской области»" loading="lazy" style="width:min(260px,100%);max-height:150px;object-fit:contain;background:#fff;border-radius:16px;padding:14px">
-          <div style="flex:1;min-width:240px"><h3>Ассоциация «Медиасфера Владимирской области»</h3><p class="muted">Сообщество журналистов, блогеров, SMM-специалистов, PR-специалистов, медиапедагогов и создателей качественного контента. Ассоциация помогает профессиональному обмену опытом и развитию традиционных и новых медиа региона.</p><p class="muted" style="margin-bottom:0">Соорганизатор — Институт экономики и туризма ВлГУ.</p></div>
+          <div style="
+    width:235px;
+    height:170px;
+    flex-shrink:1;
+    overflow:hidden;
+    border-radius:18px;
+    background:#ffff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+">
+    <img
+        src="photos/Media_IEiT.jpeg"
+        alt="Логотип ассоциации «Медиасфера Владимирской области»"
+        loading="lazy"
+        style="
+            width:100%;
+            height:100%;
+            object-fit:contain;
+            transform:scale(1.4);
+        "
+    >
+</div>
+          <div style="flex:1;min-width:100px"><h3>Ассоциация «Медиасфера Владимирской области»</h3><p class="muted">Сообщество журналистов, блогеров, SMM-специалистов, PR-специалистов, медиапедагогов и создателей качественного контента. Ассоциация помогает профессиональному обмену опытом и развитию традиционных и новых медиа региона.</p><p class="muted" style="margin-bottom:0">Соорганизатор — Институт экономики и туризма ВлГУ.</p></div>
         </div>
       </div>
     </section>
@@ -429,7 +677,7 @@
 
   <footer>
     <div class="container footer-inner">
-      <a class="brand" href="#top"><span class="brand-mark">В</span><span>III Медиаконгресс «Медиасфера»</span></a>
+      <a class="brand" href="#top"><img class="brand-mark" src="photos/Media_Sfera.png" alt="Медиасфера"><span>III Медиаконгресс «Медиасфера»</span></a>
       <span>© <span id="year"></span> III Региональный медиаконгресс «Медиасфера».</span>
       <div class="footer-links"><a href="#registration">Организаторы</a><a href="#registration">Партнёры</a><a href="#top">Наверх ↑</a></div>
     </div>
@@ -460,7 +708,12 @@
       { name: "Юлия Мохова", role: "CEO коммуникационного агентства «МОХОВА», эксперт по стратегическим коммуникациям и социально-ответственному инвестированию, член международного комитета РАСО.", photo: "photos/Yulia_Mokhova.jpg", alt: "Юлия Мохова" },
       { name: "Михаил Рубинштейн", role: "Специалист по стратегическим коммуникациям, модератор и продюсер деловых мероприятий; более 20 лет в PR и маркетинге.", photo: "photos/Mikhail_Rubinshteyn.jpg", alt: "Михаил Рубинштейн" },
       { name: "Елена Полисадова", role: "Специалист по стратегическому маркетингу, партнёр Битрикс24, дилер 1С, бизнес-тренер и преподаватель.", photo: "photos/Elena_Polisadova.jpg", alt: "Елена Полисадова" },
-      { name: "Лариса Малышева", role: "PR-директор группы компаний «Аскона».", photo: "photos/Malysheva.jpg", alt: "Лариса Малышева" }
+      { name: "Лариса Малышева", role: "PR-директор группы компаний «Аскона».", photo: "photos/Malysheva.jpg", alt: "Лариса Малышева" },
+      { name: "Павел Бесхитров", role: "Интернет-маркетолог с опытом более 15 лет. Эксперт по работе с нейросетями. Спикер более 40 российских и международных форумов.", photo: "photos/Pavel_Bezhitrov.jpg", alt: "Павел Бесхитров" },
+      { name: "Ольга Яресь", role: "Кандидат экономических наук, доцент, заведующая кафедрой «Коммерция и гостеприимство» Института экономики и туризма ВлГУ. Эксперт по системному и антикризисному управлению.", photo: "photos/Olga_Borisovna.jpg", alt: "Ольга Яресь" },
+      { name: "Ирина Наумова", role: "Кандидат экономических наук, доцент, эксперт в управлении, проектной деятельности и коммуникациях. Специализируется на мотивации, вовлечённости и эффективном взаимодействии в команде.", photo: "photos/Irina_Naumova.jpg", alt: "Ирина Наумова" },
+      { name: "Елена Панина", role: "Кандидат педагогических наук, доцент, эксперт в области маркетинга и креативного лидерства.", photo: "photos/Elena_Evgenyevna.jpg", alt: "Елена  Панина" },
+      { name: "Дина Двояшова", role: "Специалист по учебно-методической работе ИЭиТ ВлГУ, сертифицированный бизнес-тренер, эксперт по бизнес-управлению и клиентскому сервису.", photo: "photos/Diana_Sergeevna.jpg", alt: "Дина  Двояшова" }
     ];
 
     const partners = [
@@ -480,7 +733,7 @@
     );
     speakersGrid.innerHTML = speakers.map(person => `
       <article class="glass person-card reveal">
-        <img class="person-photo" src="${person.photo || speakerFallback}" alt="${escapeHtml(person.alt || person.name)}" loading="lazy">
+        <div class="person-photo-wrap"><img class="person-photo" src="${person.photo || speakerFallback}" alt="${escapeHtml(person.alt || person.name)}" loading="lazy"></div>
         <div class="person-info"><h3>${escapeHtml(person.name)}</h3><p>${escapeHtml(person.role)}</p></div>
       </article>
     `).join("");
@@ -545,6 +798,14 @@
       menuToggle.setAttribute("aria-expanded", "false");
       menuToggle.textContent = "☰ Меню";
     }));
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && navLinks.classList.contains("open")) {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "☰ Меню";
+        menuToggle.focus();
+      }
+    });
 
     const revealObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
