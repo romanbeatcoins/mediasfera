@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071a3b">
+  <meta name="description" content="III Региональный медиаконгресс Ассоциации «Медиасфера». 12 ноября 2026 года, ВлГУ, Владимир.">
+  <title>III Региональный медиаконгресс «Медиасфера»</title>
+
+  <!-- Современный шрифт с поддержкой кириллицы. Для загрузки нужен интернет. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/jpg" href="photos/ИЭиТ.jpg">
+
+  <style>
+    /* ====== НАСТРОЙКИ ДИЗАЙНА: основные цвета меняются здесь ====== */
+    :root {
+      --navy: #071a3b;
+      --blue: #123c78;
+      --sky: #75d7ff;
+      --accent: #8ce7ff;
+      --text: #f4f8ff;
+      --muted: #b8c9e5;
+      --panel: rgba(255,255,255,.075);
+      --line: rgba(255,255,255,.14);
+      --shadow: 0 20px 60px rgba(0,0,0,.22);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0;
+      font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 80% 8%, rgba(58,156,232,.24), transparent 28rem),
+        linear-gradient(135deg, #06132e 0%, #0b2856 48%, #14538b 100%);
+      background-attachment: scroll; /* На мобильных устройствах снижает рывки прокрутки */
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    body::before, body::after {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      filter: blur(65px);
+      opacity: .2;
+      pointer-events: none;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    body::before { background: #43bfff; top: 12%; left: -180px; }
+    body::after { background: #6d8cff; right: -180px; bottom: 4%; animation-delay: -8s; }
+    @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(70px,45px) scale(1.15); } }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+    .section { padding: 94px 0; position: relative; }
+    .section-head { max-width: 720px; margin-bottom: 34px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      color: var(--accent); text-transform: uppercase; letter-spacing: .14em;
+      font-size: .76rem; font-weight: 800; margin-bottom: 12px;
+    }
+    .eyebrow::before { content: ""; width: 24px; height: 2px; background: currentColor; border-radius: 9px; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font-size: clamp(2.6rem, 7vw, 5.7rem); line-height: 1.02; letter-spacing: -.055em; margin-bottom: 22px; }
+    h2 { font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.12; letter-spacing: -.04em; margin-bottom: 16px; }
+    h3 { line-height: 1.25; }
+    .gradient-text { color: var(--accent); }
+    .lead { color: var(--muted); font-size: clamp(1rem, 1.7vw, 1.18rem); max-width: 680px; }
+    .muted { color: var(--muted); }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line);
+      border-radius: 999px; padding: 9px 14px; color: #e7f5ff; background: rgba(255,255,255,.055);
+      font-size: .88rem;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      border: 1px solid transparent; border-radius: 14px; padding: 14px 21px;
+      background: var(--accent); color: #052346; font-weight: 800; cursor: pointer;
+      box-shadow: 0 8px 24px rgba(90,205,255,.16); transition: transform .22s, box-shadow .22s, background .22s;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(90,205,255,.25); background: #b0efff; }
+    .btn:active { transform: translateY(-1px); }
+    .btn-secondary { color: var(--text); background: rgba(255,255,255,.07); border-color: var(--line); box-shadow: none; }
+    .btn-secondary:hover { background: rgba(255,255,255,.13); }
+    .site-header {
+      position: sticky; top: 0; z-index: 20; border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(5,20,47,.78); backdrop-filter: blur(18px);
+    }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: -.02em; white-space: nowrap; }
+    .brand-mark { width: 42px; }
+    .nav-links { display: flex; align-items: center; gap: 22px; color: #d3e2f7; font-size: .88rem; }
+    .nav-links a { transition: color .2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .menu-toggle { display: none; border: 1px solid var(--line); background: var(--panel); color: white; padding: 9px 12px; border-radius: 10px; cursor: pointer; }
+    .hero { min-height: 690px; display: grid; align-items: center; padding: 90px 0 80px; position: relative; }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 45px; }
+    .hero-copy { position: relative; z-index: 1; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-art { min-height: 410px; position: relative; display: grid; place-items: center; }
+    .orbit {
+      position: absolute; width: min(390px, 90%); aspect-ratio: 1; border: 1px solid rgba(155,225,255,.22);
+      border-radius: 50%; animation: spin 36s linear infinite;
+    }
+    .orbit::before, .orbit::after { content: ""; position: absolute; border-radius: 50%; background: var(--accent); box-shadow: 0 0 28px rgba(140,231,255,.9); }
+    .orbit::before { width: 10px; height: 10px; top: 12%; left: 20%; }
+    .orbit::after { width: 7px; height: 7px; bottom: 14%; right: 13%; }
+    .orbit.two { width: min(300px, 70%); animation-direction: reverse; border-style: dashed; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .hero-card {
+      position: relative; width: min(340px, 90%); padding: 30px; border: 1px solid rgba(255,255,255,.2);
+      border-radius: 28px; background: linear-gradient(145deg, rgba(255,255,255,.17), rgba(255,255,255,.045));
+      backdrop-filter: blur(15px); box-shadow: var(--shadow); transform: rotate(2deg);
+    }
+    .hero-card .big-date { font-size: 4.2rem; font-weight: 800; line-height: 1; letter-spacing: -.07em; color: var(--accent); }
+    .hero-card .date-month { font-weight: 800; font-size: 1.15rem; margin: 8px 0 22px; }
+    .hero-card-line { height: 1px; background: var(--line); margin: 18px 0; }
+    .countdown { display: grid; grid-template-columns: repeat(4,1fr); gap: 9px; margin-top: 20px; }
+    .count-unit { text-align: center; border-radius: 12px; padding: 11px 4px; background: rgba(0,0,0,.16); border: 1px solid rgba(255,255,255,.08); }
+    .count-unit strong { display: block; font-size: 1.35rem; line-height: 1.25; }
+    .count-unit span { font-size: .68rem; color: var(--muted); }
+    .count-note { font-size: .78rem; color: var(--muted); margin: 12px 0 0; }
+    .glass { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .about-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 28px; align-items: stretch; }
+    .about-copy { padding: 34px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 28px; }
+    .stat { padding: 20px 15px; border-radius: 17px; background: rgba(255,255,255,.055); border: 1px solid var(--line); }
+    .stat strong { display: block; font-size: 2rem; line-height: 1.2; color: var(--accent); letter-spacing: -.04em; }
+    .stat span { color: var(--muted); font-size: .82rem; }
+    .about-side { padding: 30px; display: flex; flex-direction: column; justify-content: center; }
+    .check-list { list-style: none; padding: 0; margin: 12px 0 0; }
+    .check-list li { display: flex; gap: 12px; padding: 12px 0; color: #d9e7f8; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .check-list li:last-child { border-bottom: 0; }
+    .check { color: var(--accent); font-weight: 900; }
+    .program-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+    .program-item { display: grid; grid-template-columns: 100px 1fr; gap: 18px; padding: 23px; transition: transform .22s, background .22s; }
+    .program-item:hover, .person-card:hover, .gallery-tile:hover { transform: translateY(-4px); background-color: rgba(255,255,255,.11); }
+    .program-time { color: var(--accent); font-weight: 800; font-size: .95rem; }
+    .program-item h3 { margin: 0 0 7px; font-size: 1.05rem; }
+    .program-item p { color: var(--muted); font-size: .9rem; margin: 0; }
+    .placeholder-note { font-size: .84rem; color: #c2d4ef; border-left: 2px solid var(--accent); padding-left: 12px; margin-top: 22px; }
+    .people-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .person-card { overflow: hidden; transition: transform .22s, background .22s; }
+    .person-photo { width: 100%; aspect-ratio: 4/4.2; object-fit: cover; background: linear-gradient(135deg, #214d80, #12284d); }
+    .person-info { padding: 18px; }
+    .person-info h3 { font-size: 1rem; margin: 0 0 7px; }
+    .person-info p { color: var(--muted); font-size: .84rem; margin: 0; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(4,1fr); grid-auto-rows: 190px; gap: 12px; }
+    .gallery-tile { position: relative; overflow: hidden; padding: 0; border: 1px solid var(--line); border-radius: 17px; background: var(--panel); cursor: zoom-in; transition: transform .22s, background .22s; }
+    .gallery-tile:nth-child(5n+1) { grid-row: span 2; }
+    .gallery-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .gallery-tile:hover img { transform: scale(1.055); }
+    .gallery-empty { grid-column: 1/-1; border: 1px dashed var(--line); border-radius: 18px; padding: 35px; color: var(--muted); text-align: center; }
+    .location-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 20px; }
+    .location-info { padding: 30px; }
+    .location-info h3 { margin-bottom: 8px; }
+    .map-frame { min-height: 340px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: rgba(255,255,255,.055); }
+    .map-frame iframe { width: 100%; height: 100%; min-height: 340px; border: 0; }
+    .map-placeholder { min-height: 340px; display: grid; place-items: center; text-align: center; padding: 30px; color: var(--muted); }
+    .contact-grid { display: grid; grid-template-columns: 1fr .8fr; gap: 22px; }
+    .form-card, .contact-card { padding: 30px; }
+    .form-row { margin-bottom: 17px; }
+    .form-row label { display: block; font-weight: 700; font-size: .9rem; margin-bottom: 7px; }
+    .form-row input { width: 100%; color: white; background: rgba(2,14,35,.35); border: 1px solid rgba(255,255,255,.18); border-radius: 12px; padding: 13px 14px; outline: none; }
+    .form-row input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(140,231,255,.12); }
+    .form-row input::placeholder { color: #91a9c9; }
+    .form-message { margin: 14px 0 0; color: var(--accent); font-size: .9rem; }
+    .contact-line { padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.09); }
+    .contact-line:last-child { border-bottom: 0; }
+    .contact-line small { display: block; color: var(--muted); margin-bottom: 4px; }
+    .partner-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 22px; }
+    .partner-logo { display: grid; place-items: center; min-width: 100px; min-height: 56px; padding: 10px 14px; border: 1px solid var(--line); background: rgba(255,255,255,.06); border-radius: 12px; }
+    .partner-logo img { max-height: 36px; max-width: 110px; object-fit: contain; }
+    .partner-logo span { font-size: .8rem; color: var(--muted); }
+    footer { padding: 28px 0; border-top: 1px solid rgba(255,255,255,.1); background: rgba(2,12,30,.22); }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; color: var(--muted); font-size: .85rem; }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    .footer-links a:hover { color: var(--accent); }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .lightbox { position: fixed; inset: 0; z-index: 50; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(0,7,20,.92); backdrop-filter: blur(12px); }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: min(100%, 1100px); max-height: 82vh; object-fit: contain; border-radius: 12px; box-shadow: 0 20px 70px #0008; }
+    .lightbox-close, .lightbox-nav { position: absolute; display: grid; place-items: center; border: 1px solid #ffffff40; background: #ffffff12; color: white; cursor: pointer; border-radius: 50%; width: 46px; height: 46px; font-size: 1.45rem; }
+    .lightbox-close { top: 18px; right: 18px; }
+    .lightbox-nav.prev { left: 18px; } .lightbox-nav.next { right: 18px; }
+    .lightbox-caption { position: absolute; bottom: 16px; color: #dceaff; font-size: .85rem; text-align: center; }
+    .top-link { position: fixed; right: 18px; bottom: 18px; z-index: 15; width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: rgba(5,20,47,.8); color: white; opacity: 0; pointer-events: none; transition: opacity .2s; }
+    .top-link.show { opacity: 1; pointer-events: auto; }
+    @media (max-width: 950px) {
+      .nav-links { gap: 13px; font-size: .82rem; }
+      .hero-grid { grid-template-columns: 1fr .75fr; gap: 20px; }
+      .people-grid { grid-template-columns: repeat(2,1fr); }
+      .gallery-grid { grid-template-columns: repeat(3,1fr); }
+      .about-grid, .location-grid, .contact-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .container { width: min(100% - 28px, 1160px); }
+      .section { padding: 68px 0; }
+      .nav { min-height: 68px; }
+      .menu-toggle { display: inline-flex; }
+      .nav-links { display: none; position: absolute; top: 68px; left: 0; right: 0; padding: 18px 22px 22px; background: rgba(5,20,47,.97); border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 8px 0; }
+      .nav-links .btn { margin-top: 5px; }
+      .hero { min-height: auto; padding: 70px 0 45px; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-art { min-height: 330px; margin-top: 8px; }
+      .hero-card { padding: 24px; }
+      .hero-card .big-date { font-size: 3.6rem; }
+      .about-copy, .about-side, .form-card, .contact-card, .location-info { padding: 23px; }
+      .stats-grid { gap: 8px; }
+      .stat { padding: 14px 10px; }
+      .stat strong { font-size: 1.55rem; }
+      .stat span { font-size: .73rem; }
+      .program-grid { grid-template-columns: 1fr; }
+      .program-item { grid-template-columns: 78px 1fr; padding: 19px; gap: 12px; }
+      .gallery-grid { grid-template-columns: repeat(2,1fr); grid-auto-rows: 150px; gap: 8px; }
+      .gallery-tile:nth-child(5n+1) { grid-row: span 1; }
+      .gallery-tile:nth-child(4n+1) { grid-row: span 2; }
+      .lightbox { padding: 14px; }
+      .lightbox-nav.prev { left: 8px; } .lightbox-nav.next { right: 8px; }
+    }
+    @media (max-width: 390px) {
+      .brand { font-size: .9rem; }
+      .brand-mark { width: 36px; height: 36px; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat { display: flex; align-items: baseline; gap: 12px; }
+      .people-grid { gap: 10px; }
+      .person-info { padding: 13px; }
+      .count-unit strong { font-size: 1.1rem; }
+    }
+    /* ====== ДОПОЛНИТЕЛЬНАЯ ОПТИМИЗАЦИЯ ДЛЯ ТЕЛЕФОНОВ ====== */
+    @media (max-width: 720px) {
+      html { scroll-padding-top: 76px; }
+      body { font-size: 15px; }
+      .container { width: calc(100% - 32px); }
+      .section { padding: 54px 0; }
+      .site-header { backdrop-filter: blur(12px); }
+      .brand { min-width: 0; white-space: normal; line-height: 1.2; gap: 9px; }
+      .brand-mark { flex: 0 0 36px; }
+      .menu-toggle { flex: 0 0 auto; min-height: 44px; }
+      .nav-links { max-height: calc(100dvh - 68px); overflow-y: auto; }
+      .nav-links a { min-height: 42px; display: flex; align-items: center; }
+      .hero { padding: 48px 0 34px; }
+      h1 { font-size: clamp(2.25rem, 10vw, 3.6rem); overflow-wrap: anywhere; }
+      h2 { font-size: clamp(1.8rem, 7.5vw, 2.55rem); }
+      .lead { font-size: 1rem; }
+      .hero-meta { gap: 8px; margin: 20px 0; }
+      .pill { max-width: 100%; white-space: normal; font-size: .82rem; padding: 8px 11px; }
+      .hero-actions { display: grid; grid-template-columns: 1fr; }
+      .hero-actions .btn { width: 100%; min-height: 48px; }
+      .hero-art { min-height: 290px; }
+      .hero-card { width: min(100%, 340px); padding: 21px; transform: none; }
+      .hero-card .big-date { font-size: 3.2rem; }
+      .orbit { width: min(300px, 90%); }
+      .orbit.two { width: min(235px, 72%); }
+      .about-copy, .about-side, .form-card, .contact-card, .location-info { padding: 20px; }
+      .stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .stat { min-width: 0; padding: 12px 9px; }
+      .stat strong { font-size: clamp(1.1rem, 5vw, 1.5rem); overflow-wrap: anywhere; }
+      .stat span { font-size: .72rem; line-height: 1.35; }
+      .program-item { grid-template-columns: 1fr; gap: 7px; padding: 18px; }
+      .program-time { font-size: .86rem; }
+      .people-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .person-info { padding: 13px; }
+      .person-info h3 { font-size: .94rem; }
+      .person-info p { font-size: .8rem; line-height: 1.5; }
+      .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: clamp(115px, 36vw, 165px); }
+      .map-frame, .map-frame iframe, .map-placeholder { min-height: 260px; }
+      .form-row input { min-height: 48px; font-size: 16px; }
+      .btn { min-height: 46px; }
+      .lightbox img { max-width: 100%; max-height: 72dvh; }
+      .lightbox-close, .lightbox-nav { width: 44px; height: 44px; }
+      .lightbox-nav.prev { top: 50%; left: 8px; }
+      .lightbox-nav.next { top: 50%; right: 8px; }
+      .lightbox-caption { bottom: 12px; left: 54px; right: 54px; }
+      .top-link { right: 12px; bottom: 12px; }
+      .footer-inner { align-items: flex-start; }
+    }
+    @media (max-width: 420px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat { display: flex; align-items: baseline; gap: 12px; }
+      .stat strong { flex: 0 0 auto; }
+      .people-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+      .person-photo { aspect-ratio: 4 / 4.5; }
+      .countdown { gap: 5px; }
+      .count-unit { padding: 9px 2px; }
+      .count-unit span { font-size: .63rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ====== ИСПРАВЛЕННАЯ ШАПКА И МЕНЮ ====== */
+    .site-header { position: sticky; top: 0; z-index: 100; }
+    .site-header .nav {
+      position: relative;
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .site-header .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      flex: 0 0 auto;
+      min-width: 0;
+      white-space: nowrap;
+      line-height: 1.2;
+    }
+    .site-header .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      max-width: 44px;
+      flex: 0 0 44px;
+      overflow: hidden;
+      border-radius: 14px;
+      font-size: 1.25rem;
+    }
+    .site-header .brand-mark img {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+    }
+    .brand-title { display: inline-block; }
+    .site-header .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(10px, 1.45vw, 22px);
+      min-width: 0;
+      font-size: clamp(.76rem, .95vw, .9rem);
+    }
+    .site-header .nav-links > a:not(.btn) {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      white-space: nowrap;
+    }
+    .site-header .nav-register {
+      flex: 0 0 auto;
+      white-space: nowrap;
+      padding: 12px 16px;
+    }
+    .site-header .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 13px;
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+    @media (max-width: 1050px) {
+      .site-header .nav { gap: 12px; }
+      .site-header .brand { font-size: .9rem; }
+      .site-header .brand-mark { width: 40px; height: 40px; min-width: 40px; max-width: 40px; flex-basis: 40px; }
+      .site-header .nav-links { gap: 10px; font-size: .78rem; }
+      .site-header .nav-register { padding: 11px 12px; }
+    }
+    @media (max-width: 850px) {
+      .site-header .nav { min-height: 68px; }
+      .site-header .menu-toggle { display: inline-flex; }
+      .site-header .nav-links {
+        display: none;
+        position: absolute;
+        top: calc(100% + 1px);
+        left: -16px;
+        right: -16px;
+        max-height: calc(100dvh - 76px);
+        overflow-y: auto;
+        padding: 14px 20px 20px;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 4px;
+        background: rgba(5,20,47,.98);
+        border-bottom: 1px solid var(--line);
+        box-shadow: 0 18px 30px rgba(0,0,0,.22);
+        font-size: .95rem;
+      }
+      .site-header .nav-links.open { display: flex; }
+      .site-header .nav-links > a:not(.btn) { min-height: 44px; padding: 9px 2px; white-space: normal; }
+      .site-header .nav-links .nav-register { justify-content: center; margin-top: 8px; min-height: 48px; }
+      .site-header .brand { white-space: nowrap; font-size: .95rem; }
+    }
+    @media (max-width: 390px) {
+      .site-header .container { width: calc(100% - 24px); }
+      .site-header .brand { gap: 8px; font-size: .82rem; }
+      .site-header .brand-mark { width: 36px; height: 36px; min-width: 36px; max-width: 36px; flex-basis: 36px; border-radius: 11px; }
+      .site-header .menu-toggle { font-size: .82rem; padding: 9px 10px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ====== ШАПКА И МЕНЮ ====== -->
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Конгресс ВлГУ — на главную">
+        <img class="brand-mark" src="photos/Media_Sfera.png" alt="Медиасфера">
+        <span class="brand-title">Медиаконгресс <span class="gradient-text">2026</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Открыть меню" type="button">☰ Меню</button>
+      <nav class="nav-links" id="navLinks" aria-label="Главное меню">
+        <a href="#about">О конгрессе</a>
+        <a href="#program">Программа</a>
+        <a href="#speakers">Спикеры</a>
+        <a href="#organizers">Организаторы</a>
+        <a href="#location">Как добраться</a>
+        <a class="btn nav-register" href="#registration">Регистрация <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ====== ПЕРВЫЙ ЭКРАН: меняйте название, дату и место здесь ====== -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Медиа. Коммуникации. Будущее.</span>
+          <h1>III Региональный<br><span class="gradient-text">медиаконгресс</span></h1>
+          <p class="lead">Профессиональная встреча журналистов, блогеров, PR-специалистов, медиапедагогов и всех, кто формирует информационное пространство Владимирской области.</p>
+          <div class="hero-meta">
+            <span class="pill">◷ 12 ноября 2026 · 10:00</span>
+            <span class="pill">⌖ Владимир, ул. Горького, 87 · главный корпус</span>
+          </div>
+          <div class="hero-actions">
+            <a class="btn" href="#registration">Зарегистрироваться <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-secondary" href="#program">Смотреть программу</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="Обратный отсчёт до конгресса">
+          <div class="orbit"></div><div class="orbit two"></div>
+          <div class="hero-card">
+            <div class="eyebrow">Встречаемся во Владимире</div>
+            <div class="big-date">12</div>
+            <div class="date-month">НОЯБРЯ · ВЛГУ</div>
+            <p class="muted" style="margin-bottom:0">Искусственный интеллект, новые медиа и профессиональная ответственность.</p>
+            <div class="hero-card-line"></div>
+            <strong>До начала конгресса</strong>
+            <div class="countdown" id="countdown">
+              <div class="count-unit"><strong id="days">—</strong><span>дней</span></div>
+              <div class="count-unit"><strong id="hours">—</strong><span>часов</span></div>
+              <div class="count-unit"><strong id="minutes">—</strong><span>минут</span></div>
+              <div class="count-unit"><strong id="seconds">—</strong><span>секунд</span></div>
+            </div>
+            <p class="count-note" id="countNote">Дата и время начала настраиваются в коде.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== О КОНГРЕССЕ ====== -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">О событии</span>
+          <h2>Медиасфера <span class="gradient-text">в диалоге</span></h2>
+          <p class="lead">III Региональный медиаконгресс объединит специалистов, которые создают контент, развивают коммуникации и формируют информационную повестку Владимирской области.</p>
+        </div>
+        <div class="about-grid">
+          <div class="glass about-copy reveal">
+            <h3>О чём будем говорить?</h3>
+            <p class="muted">Медиасфера быстро меняется: искусственный интеллект влияет на создание контента, аудитория по-новому воспринимает информацию, а доверие и профессиональная ответственность становятся особенно важны.</p>
+            <p class="muted">Одна из главных тем конгресса — применение ИИ в социальных сетях и государственных структурах, а также новые возможности и риски цифровых коммуникаций.</p>
+            <div class="stats-grid">
+              <!-- Замените примерные показатели на подтверждённые данные -->
+              <div class="stat"><strong>4</strong><span>тематические площадки</span></div>
+              <div class="stat"><strong>12:00</strong><span>начало пленарного заседания</span></div>
+              <div class="stat"><strong>15:00</strong><span>специальная программа</span></div>
+            </div>
+          </div>
+          <aside class="glass about-side reveal">
+            <h3>Для кого конгресс</h3>
+            <ul class="check-list">
+              <li><span class="check">✦</span><span>Журналисты, блогеры и редакторы СМИ.</span></li>
+              <li><span class="check">✦</span><span>PR-специалисты, пресс-секретари и SMM-команды.</span></li>
+              <li><span class="check">✦</span><span>Медиапедагоги и руководители образовательных медиацентров.</span></li>
+              <li><span class="check">✦</span><span>Руководители и специалисты, работающие с коммуникациями и цифровыми медиа.</span></li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== ПРОГРАММА КОНГРЕССА ====== -->
+    <section class="section" id="program">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">12 ноября 2026 года</span>
+          <h2>Программа <span class="gradient-text">медиаконгресса</span></h2>
+          <p class="lead">Основные события дня и тематические площадки по опубликованной программе.</p>
+        </div>
+        <div class="program-grid">
+          <article class="glass program-item reveal">
+            <div class="program-time">10:00–11:30</div>
+            <div><h3>Площадка для журналистов</h3>
+              <p class="muted">Модератор: Анна Александровна Соловьёва. Аудитория 335.</p>
+              <p><b>10:00–11:30</b> — Екатерина Ивановна Квашенкина: «Всё о Дзене: новые возможности и инструменты для СМИ в 2026 году».</p>
+            </div>
+          </article>
+          <article class="glass program-item reveal">
+            <div class="program-time">10:00–11:30</div>
+            <div><h3>Площадка для PR-специалистов</h3>
+              <p class="muted">Модератор: Елена Валентиновна Котелевец. Аудитория 210.</p>
+              <p><b>10:00–10:45</b> — Елена Александровна Полисадова: «Контент-маркетинг с применением ИИ-технологий».</p>
+              <p><b>10:45–11:30</b> — Лариса Геннадьевна Малышева: «Коммуникационная и бюджетная стратегия — 2027: как планировать в сложных условиях».</p>
+            </div>
+          </article>
+          <article class="glass program-item reveal">
+            <div class="program-time">10:00–11:30</div>
+            <div><h3>Площадка для женщин-руководителей</h3>
+              <p class="muted">Модератор: Дмитрий Андреевич Козлов. Аудитория 211.</p>
+              <p><b>10:00–11:30</b> — Павел Витальевич Бежитров: «Как использовать искусственный интеллект в создании личного бренда и PR в социальных сетях».</p>
+            </div>
+          </article>
+          <article class="glass program-item reveal">
+            <div class="program-time">10:00–11:30</div>
+            <div><h3>Площадка для медиапедагогов</h3>
+              <p class="muted">Модератор: Екатерина Викторовна Якушина. Аудитория 224.</p>
+              <p><b>10:00–11:30</b> — «Эффективное управление медиакомандой: роли, коммуникация, мотивация». Команда бизнес-тренеров ИЭиТ ВлГУ.</p>
+            </div>
+          </article>
+          <article class="glass program-item reveal">
+            <div class="program-time">11:30–12:10</div>
+            <div><h3>Кофе-брейк</h3><p>Перерыв и неформальное общение участников.</p></div>
+          </article>
+          <article class="glass program-item reveal">
+            <div class="program-time">12:10–15:00</div>
+            <div><h3>Пленарное заседание</h3>
+              <p class="muted">Модератор: Дмитрий Андреевич Козлов. Место: актовый зал ВлГУ.</p>
+              <p><b>Тема:</b> «Четыре всадника коммуникационного апокалипсиса: ИИ, фейки, недоверие и хаос».</p>
+              <p><b>Юлия Александровна Мохова</b> — «Четыре всадника коммуникационного апокалипсиса: ИИ, фейки, недоверие и хаос».</p>
+              <p><b>Ольга Анатольевна Васильева</b> — «Ответы нейросетей как источник информации: возможности анализа и новые задачи для коммуникаций».</p>
+              <p><b>Дарья Владимировна Левченко</b> — «Информационная политика государства в условиях современных вызовов».</p>
+            </div>
+          </article>
+          <article class="glass program-item reveal">
+            <div class="program-time">15:00–16:00</div>
+            <div><h3>Специальное событие</h3>
+              <p class="muted">Модератор: Михаил Рудольфович Рубинштейн. Место: актовый зал ВлГУ.</p>
+              <p><b>Встреча с военкором Александром Геннадьевичем Лукьяновым.</b> Автор более 20 фильмов и специальных репортажей из зоны СВО, член Союза журналистов России, документалист и лектор общества «Знание».</p>
+            </div>
+          </article>
+          <article class="glass program-item reveal">
+            <div class="program-time">15:00–16:00</div>
+            <div><h3>Круглый стол</h3>
+              <p class="muted">Место: аудитория 224.</p>
+              <p><b>Тема:</b> «ИИ, дипфейки и цифровой образ: новые риски для медиажурналистов и СМИ».</p>
+              <p><b>Борис Валерьевич Грумбков</b> — генеральный директор АО «Издательский дом „Санкт-Петербургские ведомости“».</p>
+            </div>
+          </article>
+        </div>
+    </section>
+
+    <!-- ====== СПИКЕРЫ: фото и данные меняются в массиве speakers ниже ====== -->
+    <section class="section" id="speakers">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Люди и экспертиза</span>
+          <h2>Приглашённые <span class="gradient-text">спикеры</span></h2>
+          <p class="lead">Эксперты по медиа, стратегическим коммуникациям, журналистике и цифровому контенту.</p>
+        </div>
+        <div class="people-grid" id="speakersGrid"></div>
+        
+      </div>
+    </section>
+
+    <!-- ====== ОРГАНИЗАТОРЫ ====== -->
+    <section class="section" id="organizers">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Организаторы</span>
+          <h2>Вместе развиваем <span class="gradient-text">медиасферу региона</span></h2>
+          <p class="lead">Медиаконгресс проводят Ассоциация содействия развитию информационного пространства Владимирской области «Медиасфера Владимирской области» и Институт экономики и туризма ВлГУ.</p>
+        </div>
+        <div class="glass about-copy reveal" style="display:flex;align-items:center;gap:28px;flex-wrap:wrap">
+          <img src="photos/Media_Sfera.png" alt="Логотип ассоциации «Медиасфера Владимирской области»" loading="lazy" style="width:min(260px,100%);max-height:150px;object-fit:contain;background:#fff;border-radius:16px;padding:14px">
+          <div style="flex:1;min-width:240px"><h3>Ассоциация «Медиасфера Владимирской области»</h3><p class="muted">Сообщество журналистов, блогеров, SMM-специалистов, PR-специалистов, медиапедагогов и создателей качественного контента. Ассоциация помогает профессиональному обмену опытом и развитию традиционных и новых медиа региона.</p><p class="muted" style="margin-bottom:0">Соорганизатор — Институт экономики и туризма ВлГУ.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== КАК ДОБРАТЬСЯ: вставьте iframe-код Яндекс.Карт в настройку mapEmbed ниже ====== -->
+    <section class="section" id="location">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Место встречи</span>
+          <h2>Как нас <span class="gradient-text">найти</span></h2>
+          <p class="lead">Конгресс пройдёт во Владимирском государственном университете.</p>
+        </div>
+        <div class="location-grid">
+          <div class="glass location-info reveal">
+            <h3>Владимирский государственный университет</h3>
+            <p class="muted">Главный корпус, город Владимир</p>
+            <div class="contact-line"><small>Адрес</small><strong>600000, г. Владимир, ул. Горького, 87</strong></div>
+            <div class="contact-line"><small>Как добраться</small><span class="muted">Главный корпус ВлГУ. Перед поездкой уточните конкретную аудиторию у организаторов.</span></div>
+            <div style="margin-top:20px"><a class="btn btn-secondary" href="https://yandex.ru/maps/?text=Владимирский%20государственный%20университет%20улица%20Горького%2087" target="_blank" rel="noopener">Открыть Яндекс Карты ↗</a></div>
+          </div>
+          <div class="map-frame reveal" id="mapFrame">
+            <div class="map-placeholder"><div><div style="font-size:2rem;margin-bottom:10px">⌖</div><strong>Здесь будет карта</strong><p>Вставьте ссылку на встраивание Яндекс.Карт в переменную <code>mapEmbed</code> в начале JavaScript.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== РЕГИСТРАЦИЯ И КОНТАКТЫ ====== -->
+    <section class="section" id="registration">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Присоединяйтесь</span>
+          <h2>Регистрация на <span class="gradient-text">медиаконгресс</span></h2>
+          <p class="lead">Чтобы зарегистрироваться, перейдите к официальной форме организаторов.</p>
+          <div style="margin-top:24px"><a class="btn" href="https://forms.yandex.ru/u/6ad5021a6d2d73823da5a79e" target="_blank" rel="noopener">Перейти к регистрации ↗</a></div>
+        </div>
+        <div class="contact-grid">
+          <div class="glass form-card reveal"><h3>Дата и место</h3><div class="contact-line"><small>Дата</small><strong>12 ноября 2026 года</strong></div><div class="contact-line"><small>Начало</small><strong>10:00</strong></div><div class="contact-line"><small>Площадка</small><strong>ВлГУ, главный корпус</strong></div><div class="contact-line"><small>Адрес</small><strong>г. Владимир, ул. Горького, 87</strong></div><p class="muted" style="margin-top:18px">Пожалуйста, заполните регистрационную форму заранее.</p></div>
+          <aside class="glass contact-card reveal"><h3>Организаторы</h3><p class="muted">Ассоциация «Медиасфера Владимирской области» и Институт экономики и туризма ВлГУ.</p><div class="contact-line"><small>Регистрация</small><a href="https://forms.yandex.ru/u/6ad5021a6d2d73823da5a79e" target="_blank" rel="noopener">Яндекс Форма ↗</a></div><h3 style="margin:24px 0 8px">Партнёр</h3><div class="partner-row" id="partnersGrid"></div></aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="brand" href="#top"><img class="brand-mark" src="photos/Media_Sfera.png" alt="Медиасфера"><span>III Медиаконгресс «Медиасфера»</span></a>
+      <span>© <span id="year"></span> III Региональный медиаконгресс «Медиасфера».</span>
+      <div class="footer-links"><a href="#registration">Организаторы</a><a href="#registration">Партнёры</a><a href="#top">Наверх ↑</a></div>
+    </div>
+  </footer>
+
+  <a class="top-link" id="topLink" href="#top" aria-label="Наверх">↑</a>
+
+  <script>
+    /* =====================================================================
+       ВСЕ ПРОСТЫЕ НАСТРОЙКИ — МЕНЯЙТЕ В ЭТОМ БЛОКЕ
+       1) photos: пути к фотографиям из папки photos рядом с index.html
+       2) speakers: карточки спикеров
+       3) partners: логотипы партнёров
+       4) eventDate: дата и время начала обратного отсчёта
+       5) mapEmbed: URL карты для блока «Как добраться»
+       ===================================================================== */
+
+    // Для этого события отдельные фотографии галереи не предоставлены: загруженные снимки используются в карточках спикеров.
+    const photos = [];
+
+    // Фото и описания спикеров из предоставленных материалов.
+    const speakers = [
+      { name: "Ольга Васильева", role: "Сооснователь и генеральный директор аналитического агентства «Смыслография», кандидат социологических наук; более 25 лет в медиааналитике.", photo: "photos/Olga_Vasilyeva.jpg", alt: "Ольга Васильева" },
+      { name: "Борис Грумбков", role: "Генеральный директор издательского дома «Санкт-Петербургские ведомости».", photo: "photos/Grumbkov.jpg", alt: "Борис Грумбков" },
+      { name: "Дарья Левченко", role: "Начальник управления внешних коммуникаций Министерства экономического развития РФ.", photo: "photos/Darya_Levchenko.jpg", alt: "Дарья Левченко" },
+      { name: "Александр Лукьянов", role: "Военный корреспондент и документалист, автор более 20 фильмов и специальных репортажей из зоны СВО, лектор общества «Знание».", photo: "photos/Lukyanov.jpg", alt: "Александр Лукьянов" },
+      { name: "Екатерина Квашенкина", role: "Медиаменеджер Дзена, эксперт по стратегическому маркетингу и цифровым медиа, лектор и преподаватель.", photo: "photos/Ekaterina_Kvashenkina.jpg", alt: "Екатерина Квашенкина" },
+      { name: "Юлия Мохова", role: "CEO коммуникационного агентства «МОХОВА», эксперт по стратегическим коммуникациям и социально-ответственному инвестированию, член международного комитета РАСО.", photo: "photos/Yulia_Mokhova.jpg", alt: "Юлия Мохова" },
+      { name: "Михаил Рубинштейн", role: "Специалист по стратегическим коммуникациям, модератор и продюсер деловых мероприятий; более 20 лет в PR и маркетинге.", photo: "photos/Mikhail_Rubinshteyn.jpg", alt: "Михаил Рубинштейн" },
+      { name: "Елена Полисадова", role: "Специалист по стратегическому маркетингу, партнёр Битрикс24, дилер 1С, бизнес-тренер и преподаватель.", photo: "photos/Elena_Polisadova.jpg", alt: "Елена Полисадова" },
+      { name: "Лариса Малышева", role: "PR-директор группы компаний «Аскона».", photo: "photos/Malysheva.jpg", alt: "Лариса Малышева" },
+      { name: "Павел Бежитров", role: "Интернет-маркетолог с опытом более 15 лет. Эксперт по работе с нейросетями. Спикер более 40 российских и международных форумов.", photo: "photos/Pavel_Bezhitrov.jpg", alt: "Павел Бежитров" },
+      { name: "Ольга Борисовна Яресь", role: "Кандидат экономических наук, доцент, заведующая кафедрой «Коммерция и гостеприимство» Института экономики и туризма ВлГУ. Эксперт по системному и антикризисному управлению.", photo: "photos/Olga_Borisovna.jpg", alt: "Ольга Борисовна Яресь" },
+      { name: "Ирина Валерьевна Наумова", role: "Кандидат экономических наук, доцент, эксперт в управлении, проектной деятельности и коммуникациях. Специализируется на мотивации, вовлечённости и эффективном взаимодействии в команде.", photo: "photos/Irina_Naumova.jpg", alt: "Ирина Валерьевна Наумова" },
+      { name: "Елена Евгеньевна Панина", role: "Кандидат педагогических наук, доцент, эксперт в области маркетинга и креативного лидерства.", photo: "photos/Elena_Evgenyevna.jpg", alt: "Елена Евгеньевна Панина" },
+      { name: "Дина Сергеевна Двояшова", role: "Специалист по учебно-методической работе ИЭиТ ВлГУ, сертифицированный бизнес-тренер, эксперт по бизнес-управлению и клиентскому сервису.", photo: "photos/Diana_Sergeevna.jpg", alt: "Дина Сергеевна Двояшова" }
+    ];
+
+    const partners = [
+      { name: "Медиасфера Владимирской области", logo: "photos/Media_Sfera.png" }
+    ];
+
+    // Дата и время события по местному времени.
+    const eventDate = new Date(2026, 10, 12, 10, 0, 0);
+
+    // Карта по адресу ВлГУ, главный корпус.
+    const mapEmbed = "https://maps.google.com/maps?q=Владимирский%20государственный%20университет%20улица%20Горького%2087&t=&z=15&ie=UTF8&iwloc=&output=embed";
+
+    /* ====================== ОТРИСОВКА СПИКЕРОВ ====================== */
+    const speakersGrid = document.getElementById("speakersGrid");
+    const speakerFallback = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 525"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#244f82"/><stop offset="1" stop-color="#101e42"/></linearGradient></defs><rect width="500" height="525" fill="url(#g)"/><circle cx="250" cy="190" r="78" fill="#86dfff" opacity=".55"/><path d="M90 500c12-115 70-175 160-175s148 60 160 175" fill="#86dfff" opacity=".35"/><text x="250" y="475" font-family="Arial" font-size="20" text-anchor="middle" fill="#eaf8ff">ФОТО СПИКЕРА</text></svg>'
+    );
+    speakersGrid.innerHTML = speakers.map(person => `
+      <article class="glass person-card reveal">
+        <img class="person-photo" src="${person.photo || speakerFallback}" alt="${escapeHtml(person.alt || person.name)}" loading="lazy">
+        <div class="person-info"><h3>${escapeHtml(person.name)}</h3><p>${escapeHtml(person.role)}</p></div>
+      </article>
+    `).join("");
+
+    /* В предоставленных материалах были портреты спикеров, а не фотографии прошлых событий, поэтому отдельная фотогалерея не показывается. */
+
+    /* ====================== ЛОГОТИПЫ ПАРТНЁРОВ ====================== */
+    const partnersGrid = document.getElementById("partnersGrid");
+    partnersGrid.innerHTML = partners.length
+      ? partners.map(partner => `<div class="partner-logo"><img src="${escapeAttribute(partner.logo)}" alt="${escapeAttribute(partner.name)}" loading="lazy"></div>`).join("")
+      : '<div class="partner-logo"><span>Ассоциация «Медиасфера»</span></div>';
+
+    /* ====================== КАРТА ====================== */
+    if (mapEmbed.trim()) {
+      const frame = document.createElement("iframe");
+      frame.src = mapEmbed;
+      frame.title = "Карта проезда к ВлГУ, корпус 1";
+      frame.loading = "lazy";
+      frame.referrerPolicy = "no-referrer-when-downgrade";
+      frame.allowFullscreen = true;
+      const mapFrame = document.getElementById("mapFrame");
+      mapFrame.innerHTML = "";
+      mapFrame.appendChild(frame);
+    }
+
+    /* ====================== ОБРАТНЫЙ ОТСЧЁТ ====================== */
+    const countNote = document.getElementById("countNote");
+    function updateCountdown() {
+      const diff = eventDate.getTime() - Date.now();
+      if (diff <= 0) {
+        ["days", "hours", "minutes", "seconds"].forEach(id => document.getElementById(id).textContent = "00");
+        countNote.textContent = "Конгресс уже начался или дата события прошла.";
+        return;
+      }
+      const totalSeconds = Math.floor(diff / 1000);
+      document.getElementById("days").textContent = String(Math.floor(totalSeconds / 86400)).padStart(2, "0");
+      document.getElementById("hours").textContent = String(Math.floor((totalSeconds % 86400) / 3600)).padStart(2, "0");
+      document.getElementById("minutes").textContent = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+      document.getElementById("seconds").textContent = String(totalSeconds % 60).padStart(2, "0");
+      countNote.textContent = "Отсчёт до 10:00 по местному времени.";
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    /* Регистрация ведёт напрямую на официальную Яндекс Форму. */
+
+    /* ====================== МЕНЮ, АНИМАЦИИ И МЕЛОЧИ ====================== */
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
+    }
+    function escapeAttribute(value) { return escapeHtml(value); }
+
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.textContent = isOpen ? "× Закрыть" : "☰ Меню";
+    });
+    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.textContent = "☰ Меню";
+    }));
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && navLinks.classList.contains("open")) {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "☰ Меню";
+        menuToggle.focus();
+      }
+    });
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(element => revealObserver.observe(element));
+
+    const topLink = document.getElementById("topLink");
+    window.addEventListener("scroll", () => topLink.classList.toggle("show", window.scrollY > 500), { passive: true });
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
