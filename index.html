@@ -6,15 +6,12 @@
   <meta name="theme-color" content="#071a3b">
   <meta name="description" content="III Региональный медиаконгресс Ассоциации «Медиасфера». 12 ноября 2026 года, ВлГУ, Владимир.">
   <title>III Региональный медиаконгресс «Медиасфера»</title>
-
-  <!-- Современный шрифт с поддержкой кириллицы. Для загрузки нужен интернет. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/jpg" href="photos/ИЭиТ.jpg">
 
   <style>
-    /* ====== НАСТРОЙКИ ДИЗАЙНА: основные цвета меняются здесь ====== */
     :root {
       --navy: #071a3b;
       --blue: #123c78;
@@ -37,7 +34,7 @@
       background:
         radial-gradient(circle at 80% 8%, rgba(58,156,232,.24), transparent 28rem),
         linear-gradient(135deg, #06132e 0%, #0b2856 48%, #14538b 100%);
-      background-attachment: scroll; /* На мобильных устройствах снижает рывки прокрутки */
+      background-attachment: scroll; 
       line-height: 1.65;
       overflow-x: hidden;
     }
@@ -255,7 +252,6 @@
       .person-info { padding: 13px; }
       .count-unit strong { font-size: 1.1rem; }
     }
-    /* ====== ДОПОЛНИТЕЛЬНАЯ ОПТИМИЗАЦИЯ ДЛЯ ТЕЛЕФОНОВ ====== */
     @media (max-width: 720px) {
       html { scroll-padding-top: 76px; }
       body { font-size: 15px; }
@@ -318,7 +314,6 @@
       .reveal { opacity: 1; transform: none; }
     }
 
-    /* ====== ИСПРАВЛЕННАЯ ШАПКА И МЕНЮ ====== */
     .site-header { position: sticky; top: 0; z-index: 100; }
     .site-header .nav {
       position: relative;
@@ -426,7 +421,6 @@
   </style>
 </head>
 <body>
-  <!-- ====== ШАПКА И МЕНЮ ====== -->
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="#top" aria-label="Конгресс ВлГУ — на главную">
@@ -446,7 +440,6 @@
   </header>
 
   <main id="top">
-    <!-- ====== ПЕРВЫЙ ЭКРАН: меняйте название, дату и место здесь ====== -->
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-copy">
@@ -483,7 +476,6 @@
       </div>
     </section>
 
-    <!-- ====== О КОНГРЕССЕ ====== -->
     <section class="section" id="about">
       <div class="container">
         <div class="section-head reveal">
@@ -497,7 +489,6 @@
             <p class="muted">Медиасфера быстро меняется: искусственный интеллект влияет на создание контента, аудитория по-новому воспринимает информацию, а доверие и профессиональная ответственность становятся особенно важны.</p>
             <p class="muted">Одна из главных тем конгресса — применение ИИ в социальных сетях и государственных структурах, а также новые возможности и риски цифровых коммуникаций.</p>
             <div class="stats-grid">
-              <!-- Замените примерные показатели на подтверждённые данные -->
               <div class="stat"><strong>4</strong><span>тематические площадки</span></div>
               <div class="stat"><strong>12:00</strong><span>начало пленарного заседания</span></div>
               <div class="stat"><strong>15:00</strong><span>специальная программа</span></div>
@@ -516,7 +507,6 @@
       </div>
     </section>
 
-    <!-- ====== ПРОГРАММА КОНГРЕССА ====== -->
     <section class="section" id="program">
       <div class="container">
         <div class="section-head reveal">
@@ -585,7 +575,6 @@
         </div>
     </section>
 
-    <!-- ====== СПИКЕРЫ: фото и данные меняются в массиве speakers ниже ====== -->
     <section class="section" id="speakers">
       <div class="container">
         <div class="section-head reveal">
@@ -598,7 +587,6 @@
       </div>
     </section>
 
-    <!-- ====== ОРГАНИЗАТОРЫ ====== -->
     <section class="section" id="organizers">
       <div class="container">
         <div class="section-head reveal">
@@ -630,12 +618,11 @@
         "
     >
 </div>
-          <div style="flex:1;min-width:100px"><h3>Ассоциация «Медиасфера Владимирской области»</h3><p class="muted">Сообщество журналистов, блогеров, SMM-специалистов, PR-специалистов, медиапедагогов и создателей качественного контента. Ассоциация помогает профессиональному обмену опытом и развитию традиционных и новых медиа региона.</p><p class="muted" style="margin-bottom:0">Соорганизатор — Институт экономики и туризма ВлГУ.</p></div>
+          <div style="flex:1;min-width:100px"><p class="muted">Сообщество журналистов, блогеров, SMM-специалистов, PR-специалистов, медиапедагогов и создателей качественного контента. Ассоциация помогает профессиональному обмену опытом и развитию традиционных и новых медиа региона.</p><p class="muted" style="margin-bottom:0">Соорганизатор — Институт экономики и туризма ВлГУ.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- ====== КАК ДОБРАТЬСЯ: вставьте iframe-код Яндекс.Карт в настройку mapEmbed ниже ====== -->
     <section class="section" id="location">
       <div class="container">
         <div class="section-head reveal">
@@ -658,7 +645,6 @@
       </div>
     </section>
 
-    <!-- ====== РЕГИСТРАЦИЯ И КОНТАКТЫ ====== -->
     <section class="section" id="registration">
       <div class="container">
         <div class="section-head reveal">
@@ -686,19 +672,9 @@
   <a class="top-link" id="topLink" href="#top" aria-label="Наверх">↑</a>
 
   <script>
-    /* =====================================================================
-       ВСЕ ПРОСТЫЕ НАСТРОЙКИ — МЕНЯЙТЕ В ЭТОМ БЛОКЕ
-       1) photos: пути к фотографиям из папки photos рядом с index.html
-       2) speakers: карточки спикеров
-       3) partners: логотипы партнёров
-       4) eventDate: дата и время начала обратного отсчёта
-       5) mapEmbed: URL карты для блока «Как добраться»
-       ===================================================================== */
-
-    // Для этого события отдельные фотографии галереи не предоставлены: загруженные снимки используются в карточках спикеров.
+  
     const photos = [];
 
-    // Фото и описания спикеров из предоставленных материалов.
     const speakers = [
       { name: "Ольга Васильева", role: "Сооснователь и генеральный директор аналитического агентства «Смыслография», кандидат социологических наук; более 25 лет в медиааналитике.", photo: "photos/Olga_Vasilyeva.jpg", alt: "Ольга Васильева" },
       { name: "Борис Грумбков", role: "Генеральный директор издательского дома «Санкт-Петербургские ведомости».", photo: "photos/Grumbkov.jpg", alt: "Борис Грумбков" },
@@ -720,13 +696,10 @@
       { name: "Медиасфера Владимирской области", logo: "photos/Media_Sfera.png" }
     ];
 
-    // Дата и время события по местному времени.
     const eventDate = new Date(2026, 10, 12, 10, 0, 0);
 
-    // Карта по адресу ВлГУ, главный корпус.
     const mapEmbed = "https://maps.google.com/maps?q=Владимирский%20государственный%20университет%20улица%20Горького%2087&t=&z=15&ie=UTF8&iwloc=&output=embed";
 
-    /* ====================== ОТРИСОВКА СПИКЕРОВ ====================== */
     const speakersGrid = document.getElementById("speakersGrid");
     const speakerFallback = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 525"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#244f82"/><stop offset="1" stop-color="#101e42"/></linearGradient></defs><rect width="500" height="525" fill="url(#g)"/><circle cx="250" cy="190" r="78" fill="#86dfff" opacity=".55"/><path d="M90 500c12-115 70-175 160-175s148 60 160 175" fill="#86dfff" opacity=".35"/><text x="250" y="475" font-family="Arial" font-size="20" text-anchor="middle" fill="#eaf8ff">ФОТО СПИКЕРА</text></svg>'
@@ -738,15 +711,12 @@
       </article>
     `).join("");
 
-    /* В предоставленных материалах были портреты спикеров, а не фотографии прошлых событий, поэтому отдельная фотогалерея не показывается. */
-
-    /* ====================== ЛОГОТИПЫ ПАРТНЁРОВ ====================== */
+  
     const partnersGrid = document.getElementById("partnersGrid");
     partnersGrid.innerHTML = partners.length
       ? partners.map(partner => `<div class="partner-logo"><img src="${escapeAttribute(partner.logo)}" alt="${escapeAttribute(partner.name)}" loading="lazy"></div>`).join("")
       : '<div class="partner-logo"><span>Ассоциация «Медиасфера»</span></div>';
 
-    /* ====================== КАРТА ====================== */
     if (mapEmbed.trim()) {
       const frame = document.createElement("iframe");
       frame.src = mapEmbed;
@@ -759,7 +729,6 @@
       mapFrame.appendChild(frame);
     }
 
-    /* ====================== ОБРАТНЫЙ ОТСЧЁТ ====================== */
     const countNote = document.getElementById("countNote");
     function updateCountdown() {
       const diff = eventDate.getTime() - Date.now();
@@ -778,9 +747,7 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    /* Регистрация ведёт напрямую на официальную Яндекс Форму. */
-
-    /* ====================== МЕНЮ, АНИМАЦИИ И МЕЛОЧИ ====================== */
+   
     function escapeHtml(value) {
       return String(value).replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
     }
